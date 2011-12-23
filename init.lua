@@ -1,4 +1,19 @@
-require 'textadept'
+--require 'textadept'
+require 'textadept.adeptsense'
+require 'textadept.bookmarks'
+require 'textadept.command_entry'
+require 'textadept.editing'
+require 'textadept.find'
+require 'textadept.filter_through'
+require 'textadept.mime_types'
+require 'textadept.run'
+require 'textadept.session'
+require 'textadept.snapopen'
+require 'textadept.snippets'
+-- These need to be loaded last.
+require 'textadept.keys'
+
+
 require 'textadept.file_browser'
 require 'hypertext.commands'
 -- require 'lua.debugger'
@@ -72,18 +87,21 @@ end
 ------------------------------------------------------------------------------------
 keys.cg = _m.textadept.editing.match_brace
 keys.cG= { _m.textadept.editing.match_brace, 'select' }
-keys['al'] = _m.textadept.editing.select_line
 --keys['c0'] = m_textadept.snippets._select
-keys['ac'] = { view.goto_buffer, view, 1, false }   
-keys['ax'] = { view.goto_buffer, view, -1, false }	
 
-keys['a\b'] =  {buffer.del_word_left, buffer}
-keys['ad'] =  {buffer.del_word_right, buffer}
 keys['ck'] =  {buffer.line_cut, buffer}
-keys['cO']  = buffer.close
+keys['cj'] =  {buffer.line_delete, buffer} 
 keys['cw']  = buffer.close
 keys['c\b'] =  {buffer.del_word_left, buffer}
 keys['cd']  = {buffer.del_word_right, buffer}
+keys['a\b'] =  {buffer.del_word_left, buffer}
+keys['ad'] =  {buffer.del_word_right, buffer}
+keys['cy'] = _m.textadept.editing.select_line
+keys['cp'] = _m.textadept.editing.select_paragraph
+keys['ce'] = _m.textadept.editing.select_enclosed
+keys['ci'] = _m.textadept.editing.select_indented_block
+
+
 
 -- view
 keys['cH']  = { view.split, view, false }
@@ -93,19 +111,25 @@ keys['cP']  = { gui.goto_view, -1, false }
 keys['cW']  = { view.unsplit, view }
 
 -- cursor movement
-keys['a,']  = {buffer.page_down, buffer}
-keys['a.']  = {buffer.page_up, buffer}
-keys['aj']  = {buffer.word_right, buffer}
-keys['ak']  = {buffer.word_left, buffer}
+keys['al']  = {buffer.char_right, buffer}
+keys['ah']  = {buffer.char_left, buffer}
+keys['aj']  = {buffer.line_down, buffer}
+keys['ak']  = {buffer.line_up, buffer}
+keys['af']  = {buffer.word_right, buffer}
+keys['ab']  = {buffer.word_left, buffer}
 keys['aJ']  = {move_somedown, 20}
 keys['aK']  = {move_someup, 20}
---keys['ca'] = { buffer.home,  buffer}
-keys['ca'] = { buffer.vc_home,  buffer}
-keys['ce'] = { buffer.line_end,  buffer}	
-keys['cA'] = { buffer.document_start,  buffer}
-keys['cE'] = { buffer.document_end,  buffer}	
-keys['c/'] = {goto_nearest_occurrence, false}
-keys['c?'] = {goto_nearest_occurrence, true}
+keys['av']  = {buffer.page_down, buffer}
+keys['az']  = {buffer.page_up, buffer}
+keys['am'] = {goto_nearest_occurrence, false}
+keys['aM'] = {goto_nearest_occurrence, true}
+keys['aa'] = { buffer.vc_home, buffer}
+keys['ae'] = { buffer.line_end, buffer}	
+keys['aq'] = { buffer.document_start, buffer}
+keys['aw'] = { buffer.document_end, buffer}	
+keys['ac'] = { view.goto_buffer, view, 1, false }   
+keys['ax'] = { view.goto_buffer, view, -1, false }	
+
 
 -- programming about
 keys['cm'] =  _m.textadept.editing.block_comment
