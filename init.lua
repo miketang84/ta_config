@@ -85,10 +85,6 @@ end
 ------------------------------------------------------------------------------------
 -- Keys Binding
 ------------------------------------------------------------------------------------
-keys.cg = _m.textadept.editing.match_brace
-keys.cG= { _m.textadept.editing.match_brace, 'select' }
---keys['c0'] = m_textadept.snippets._select
-
 keys['ck'] =  {buffer.line_cut, buffer}
 keys['cj'] =  {buffer.line_delete, buffer} 
 keys['cw']  = buffer.close
@@ -100,7 +96,8 @@ keys['cy'] = _m.textadept.editing.select_line
 keys['cp'] = _m.textadept.editing.select_paragraph
 keys['ce'] = _m.textadept.editing.select_enclosed
 keys['ci'] = _m.textadept.editing.select_indented_block
-
+keys.cg = _m.textadept.editing.match_brace
+keys.cG= { _m.textadept.editing.match_brace, 'select' }
 
 
 -- view
@@ -129,6 +126,7 @@ keys['aq'] = { buffer.document_start, buffer}
 keys['aw'] = { buffer.document_end, buffer}	
 keys['ac'] = { view.goto_buffer, view, 1, false }   
 keys['ax'] = { view.goto_buffer, view, -1, false }	
+keys['au'] = { _m.textadept.editing.goto_line }	
 
 
 -- programming about
@@ -136,4 +134,4 @@ keys['cm'] =  _m.textadept.editing.block_comment
 keys['c\\'] =  _m.textadept.adeptsense.complete_symbol
 
 -- miscs
-keys['ao'] = { _m.textadept.file_browser.init,  '.'}	
+-- keys['ao'] = { _m.textadept.file_browser.init,  '.'}	
